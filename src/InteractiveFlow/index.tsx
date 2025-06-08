@@ -1,5 +1,9 @@
-import { type FC } from "react";
+import { FlowItem } from "./FlowItem";
+import { FlowContext } from "./FlowContext";
 
-export const InteractiveFlow: FC = () => {
-  return <div>test</div>;
+const InteractiveFlow = {
+  Context: FlowContext,
+  Item: FlowItem,
 };
+
+export default InteractiveFlow;
