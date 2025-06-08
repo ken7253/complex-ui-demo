@@ -72,22 +72,20 @@ export const ColumnSample: StoryObj<typeof InteractiveFlow.Context> = {
     };
 
     return (
-      <div style={{ height: "100vh" }}>
-        <InteractiveFlow.Context direction={direction}>
-          <>
-            {item.map((data, index) => (
-              <InteractiveFlow.Item
-                key={index}
-                onInsert={(type) => handleInsert(type, index)}
-                prevButton={<DefaultButton data-debug="prev">+</DefaultButton>}
-                nextButton={<DefaultButton data-debug="next">+</DefaultButton>}
-              >
-                <DummyContent ident={`${data}:${index}`} />
-              </InteractiveFlow.Item>
-            ))}
-          </>
-        </InteractiveFlow.Context>
-      </div>
+      <InteractiveFlow.Context direction={direction}>
+        <>
+          {item.map((data, index) => (
+            <InteractiveFlow.Item
+              key={index}
+              onInsert={(type) => handleInsert(type, index)}
+              prevButton={<DefaultButton data-debug="prev">+</DefaultButton>}
+              nextButton={<DefaultButton data-debug="next">+</DefaultButton>}
+            >
+              <DummyContent ident={`${data}:${index}`} />
+            </InteractiveFlow.Item>
+          ))}
+        </>
+      </InteractiveFlow.Context>
     );
   },
 };
