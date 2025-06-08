@@ -4,7 +4,7 @@ import { use } from "react";
 import { Context } from "./context";
 import styles from "./DefaultButton.module.css";
 
-type Props = PropsWithChildren<JSX.IntrinsicElements["button"] & {}>;
+type Props = PropsWithChildren<JSX.IntrinsicElements["div"] & {}>;
 
 export const DefaultButton: FC<Props> = ({ children, ...rest }) => {
   const { direction } = use(Context);
@@ -14,8 +14,8 @@ export const DefaultButton: FC<Props> = ({ children, ...rest }) => {
   };
 
   return (
-    <button className={styles.button} style={computedStyles} {...rest}>
+    <div className={styles.button} style={computedStyles} {...rest}>
       {children}
-    </button>
+    </div>
   );
 };

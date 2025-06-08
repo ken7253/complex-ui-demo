@@ -58,7 +58,6 @@ export const ColumnItem: StoryObj<typeof InteractiveFlow.Context> = {
 };
 
 import { useState } from "react";
-import type { InsertEventHandler } from "./types";
 
 export const ColumnSample: StoryObj<typeof InteractiveFlow.Context> = {
   args: {
@@ -67,13 +66,8 @@ export const ColumnSample: StoryObj<typeof InteractiveFlow.Context> = {
   render: ({ direction }) => {
     const [item, setItem] = useState<string[]>(["foo", "foo"]);
 
-    const handleInsertPrev: InsertEventHandler = (index) => {
-      const insertIndex = index;
-      setItem((prev) => [...prev.slice(0, insertIndex), "new", ...prev.slice(insertIndex)]);
-    };
-
-    const handleInsertNext: InsertEventHandler = (index) => {
-      const insertIndex = index + 1;
+    const handleInsert = (type: "prev" | "next", index: number) => {
+      const insertIndex = type === "prev" ? index : index + 1;
       setItem((prev) => [...prev.slice(0, insertIndex), "new", ...prev.slice(insertIndex)]);
     };
 
@@ -84,16 +78,9 @@ export const ColumnSample: StoryObj<typeof InteractiveFlow.Context> = {
             {item.map((data, index) => (
               <InteractiveFlow.Item
                 key={index}
-                prevButton={
-                  <DefaultButton data-debug="prev" onClick={(event) => handleInsertPrev(index, event)}>
-                    +
-                  </DefaultButton>
-                }
-                nextButton={
-                  <DefaultButton data-debug="next" onClick={(event) => handleInsertNext(index, event)}>
-                    +
-                  </DefaultButton>
-                }
+                onInsert={(type) => handleInsert(type, index)}
+                prevButton={<DefaultButton data-debug="prev">+</DefaultButton>}
+                nextButton={<DefaultButton data-debug="next">+</DefaultButton>}
               >
                 <DummyContent ident={`${data}:${index}`} />
               </InteractiveFlow.Item>

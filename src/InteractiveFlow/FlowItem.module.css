@@ -8,3 +8,22 @@
   width: fit-content;
   max-width: 400px;
 }
+
+.button {
+  background-color: #333;
+  width: 100%;
+  color: white;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline-color: #0056b3;
+  outline-offset: -5px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
