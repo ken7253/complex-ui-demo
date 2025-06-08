@@ -1,12 +1,12 @@
-import type { FC, PropsWithChildren, CSSProperties } from "react";
+import type { FC, PropsWithChildren, CSSProperties, JSX } from "react";
 import { use } from "react";
 
 import { Context } from "./context";
 import styles from "./DefaultButton.module.css";
 
-type Props = PropsWithChildren;
+type Props = PropsWithChildren<JSX.IntrinsicElements["button"] & {}>;
 
-export const DefaultButton: FC<Props> = ({ children }) => {
+export const DefaultButton: FC<Props> = ({ children, ...rest }) => {
   const { direction } = use(Context);
 
   const computedStyles: CSSProperties = {
@@ -14,7 +14,7 @@ export const DefaultButton: FC<Props> = ({ children }) => {
   };
 
   return (
-    <button className={styles.button} style={computedStyles}>
+    <button className={styles.button} style={computedStyles} {...rest}>
       {children}
     </button>
   );
