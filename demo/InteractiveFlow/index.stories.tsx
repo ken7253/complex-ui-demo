@@ -13,7 +13,4 @@ export default meta;
 
 export const Default: Story = {
   args: {},
-  parameters: {
-    layout: "fullscreen",
-  },
 };
