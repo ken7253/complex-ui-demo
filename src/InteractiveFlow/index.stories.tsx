@@ -16,24 +16,11 @@ export default meta;
 const DummyContent = () => (
   <div style={{ padding: "20px" }}>
     <h2>Flow Item</h2>
-    <p>This is a flow item with previous and next buttons.</p>
+    <p>This is a flow item.</p>
   </div>
 );
 
-export const FlowItem: StoryObj = {
-  parameters: {
-    layout: "auto",
-  },
-  render: () => {
-    return (
-      <InteractiveFlow.Item prevButton={<DefaultButton>+</DefaultButton>} nextButton={<DefaultButton>+</DefaultButton>}>
-        <DummyContent />
-      </InteractiveFlow.Item>
-    );
-  },
-};
-
-export const RowSample: StoryObj<typeof InteractiveFlow.Context> = {
+export const RowItem: StoryObj<typeof InteractiveFlow.Context> = {
   args: {
     direction: "row",
   },
@@ -51,7 +38,7 @@ export const RowSample: StoryObj<typeof InteractiveFlow.Context> = {
   },
 };
 
-export const ColumnSample: StoryObj<typeof InteractiveFlow.Context> = {
+export const ColumnItem: StoryObj<typeof InteractiveFlow.Context> = {
   args: {
     direction: "column",
   },
@@ -64,6 +51,50 @@ export const ColumnSample: StoryObj<typeof InteractiveFlow.Context> = {
         >
           <DummyContent />
         </InteractiveFlow.Item>
+      </InteractiveFlow.Context>
+    );
+  },
+};
+
+export const RowSample: StoryObj<typeof InteractiveFlow.Context> = {
+  args: {
+    direction: "row",
+  },
+  render: ({ direction }) => {
+    return (
+      <InteractiveFlow.Context direction={direction}>
+        <>
+          {[1, 2, 3].map(() => (
+            <InteractiveFlow.Item
+              prevButton={<DefaultButton>+</DefaultButton>}
+              nextButton={<DefaultButton>+</DefaultButton>}
+            >
+              <DummyContent />
+            </InteractiveFlow.Item>
+          ))}
+        </>
+      </InteractiveFlow.Context>
+    );
+  },
+};
+
+export const ColumnSample: StoryObj<typeof InteractiveFlow.Context> = {
+  args: {
+    direction: "column",
+  },
+  render: ({ direction }) => {
+    return (
+      <InteractiveFlow.Context direction={direction}>
+        <>
+          {[1, 2, 3].map(() => (
+            <InteractiveFlow.Item
+              prevButton={<DefaultButton>+</DefaultButton>}
+              nextButton={<DefaultButton>+</DefaultButton>}
+            >
+              <DummyContent />
+            </InteractiveFlow.Item>
+          ))}
+        </>
       </InteractiveFlow.Context>
     );
   },
