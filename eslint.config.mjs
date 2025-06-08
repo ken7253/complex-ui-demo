@@ -9,31 +9,47 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
+    name: "eslint:js/recommended",
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     plugins: { js },
-    extends: ["js/recommended"],
-  },
-  {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     languageOptions: { globals: globals.browser },
+    ...js.configs.recommended,
   },
-  tseslint.configs.recommended,
   {
-    ...pluginReact.configs.flat.recommended,
+    name: "eslint:js/custom",
+    rules: {
+      "no-plusplus": "error",
+      "no-param-reassign": "error",
+      "max-classes-per-file": "error",
+      eqeqeq: ["error", "smart"],
+      radix: ["error", "as-needed"],
+    },
+  },
+  ...tseslint.configs.recommended,
+  Object.assign(pluginReact.configs.flat.recommended, {
+    name: "react/recommended",
+    files: ["**/*.{jsx,tsx}"],
+    plugins: { react: pluginReact },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
     rules: {
       "react/jsx-uses-react": "off",
       "react/react-in-jsx-scope": "off",
     },
+  }),
+  {
+    ...reactHooks.configs["recommended-latest"],
   },
   {
+    name: "eslint:json/recommended",
+    ...json.configs.recommended,
     files: ["**/*.json"],
     plugins: { json },
     language: "json/json",
-    extends: ["json/recommended"],
     ignores: ["package-lock.json"],
-  },
-  {
-    ...reactHooks.configs["recommended-latest"],
   },
   ...storybook.configs["flat/recommended"],
 ]);
